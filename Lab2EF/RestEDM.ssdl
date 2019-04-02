@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="MySQL" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RestEntitiesStoreContainer">
+    <EntitySet Name="comment_or_complains" EntityType="RestModel.Store.comment_or_complain" store:Type="Tables" Schema="rest" Table="comment_or_complain" />
+    <EntitySet Name="dish_categories" EntityType="RestModel.Store.dish_category" store:Type="Tables" Schema="rest" Table="dish_category" />
+    <EntitySet Name="dish_dictionaries" EntityType="RestModel.Store.dish_dictionary" store:Type="Tables" Schema="rest" Table="dish_dictionary" />
+    <EntitySet Name="dishes_orders" EntityType="RestModel.Store.dishes_order" store:Type="Tables" Schema="rest" Table="dishes_order" />
+    <EntitySet Name="orders" EntityType="RestModel.Store.order" store:Type="Tables" Schema="rest" Table="order" />
+    <EntitySet Name="positions" EntityType="RestModel.Store.position" store:Type="Tables" Schema="rest" Table="position" />
+    <EntitySet Name="staffs" EntityType="RestModel.Store.staff" store:Type="Tables" Schema="rest" Table="staff" />
+    <EntitySet Name="users" EntityType="RestModel.Store.users" store:Type="Tables" Schema="rest" Table="users" />
+    <EntitySet Name="dish_menus" EntityType="RestModel.Store.dish_menu" store:Type="Views" Schema="rest" Table="dish_menu" />
+    <AssociationSet Name="fk_comment_order" Association="RestModel.Store.fk_comment_order">
+      <End Role="order" EntitySet="orders" />
+      <End Role="comment_or_complain" EntitySet="comment_or_complains" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dish_to_category" Association="RestModel.Store.fk_dish_to_category">
+      <End Role="dish_category" EntitySet="dish_categories" />
+      <End Role="dish_dictionary" EntitySet="dish_dictionaries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_dish_dish" Association="RestModel.Store.fk_order_dish_dish">
+      <End Role="dish_dictionary" EntitySet="dish_dictionaries" />
+      <End Role="dishes_order" EntitySet="dishes_orders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_dish_order" Association="RestModel.Store.fk_order_dish_order">
+      <End Role="order" EntitySet="orders" />
+      <End Role="dishes_order" EntitySet="dishes_orders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_staff_position" Association="RestModel.Store.fk_staff_position">
+      <End Role="position" EntitySet="positions" />
+      <End Role="staff" EntitySet="staffs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="comment_or_complain">
+    <Key>
+      <PropertyRef Name="comment_or_complain_id" />
+    </Key>
+    <Property Name="comment_or_complain_id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="email" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="comment" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dish_category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="category_name" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="notes" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+  </EntityType>
+  <EntityType Name="dish_dictionary">
+    <Key>
+      <PropertyRef Name="dish_id" />
+    </Key>
+    <Property Name="dish_id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="name" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+  </EntityType>
+  <EntityType Name="dishes_order">
+    <Key>
+      <PropertyRef Name="dishes_order_id" />
+    </Key>
+    <Property Name="dish_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="dishes_count" Type="int" />
+    <Property Name="dishes_order_id" Type="int" Nullable="false" DefaultValue="1" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="table_id" Type="int" />
+    <Property Name="order_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="position_id" />
+    </Key>
+    <Property Name="position_id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="staff_position" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="salary" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="staff">
+    <Key>
+      <PropertyRef Name="staff_id" />
+    </Key>
+    <Property Name="staff_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="passport_id" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="email" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="position_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="varchar" Nullable="false" MaxLength="20" Collation="utf8_general_ci" />
+    <Property Name="hash" Type="varchar" Nullable="false" MaxLength="96" Collation="utf8_general_ci" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8_general_ci" />
+  </EntityType>
+  <EntityType Name="dish_menu">
+    <Documentation>
+      <Summary>VIEW</Summary>
+    </Documentation>
+    <Key>
+      <PropertyRef Name="dish_id" />
+      <PropertyRef Name="category_name" />
+      <PropertyRef Name="amount" />
+      <PropertyRef Name="price" />
+    </Key>
+    <Property Name="dish_id" Type="int" Nullable="false" />
+    <Property Name="category_name" Type="varchar" Nullable="false" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="name" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="notes" Type="varchar" MaxLength="45" Collation="utf8mb4_0900_ai_ci" />
+  </EntityType>
+  <Association Name="fk_comment_order">
+    <End Role="order" Type="RestModel.Store.order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="comment_or_complain" Type="RestModel.Store.comment_or_complain" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="comment_or_complain">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dish_to_category">
+    <End Role="dish_category" Type="RestModel.Store.dish_category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="dish_dictionary" Type="RestModel.Store.dish_dictionary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dish_category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="dish_dictionary">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_dish_dish">
+    <End Role="dish_dictionary" Type="RestModel.Store.dish_dictionary" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="dishes_order" Type="RestModel.Store.dishes_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dish_dictionary">
+        <PropertyRef Name="dish_id" />
+      </Principal>
+      <Dependent Role="dishes_order">
+        <PropertyRef Name="dish_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_dish_order">
+    <End Role="order" Type="RestModel.Store.order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="dishes_order" Type="RestModel.Store.dishes_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="dishes_order">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_staff_position">
+    <End Role="position" Type="RestModel.Store.position" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="staff" Type="RestModel.Store.staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="position">
+        <PropertyRef Name="position_id" />
+      </Principal>
+      <Dependent Role="staff">
+        <PropertyRef Name="position_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

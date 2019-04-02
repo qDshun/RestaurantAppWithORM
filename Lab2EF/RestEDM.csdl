@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestModel" Alias="Self" d1p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d1p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RestEntities" annotation:LazyLoadingEnabled="true" ed:Guid="50aa80e5-b906-4d83-b2af-a6816f61169a">
+    <EntitySet Name="CommentOrComplains" EntityType="RestModel.CommentOrComplain" />
+    <EntitySet Name="DishCategories" EntityType="RestModel.DishCategory" />
+    <EntitySet Name="DishDictionaries" EntityType="RestModel.DishDictionary" />
+    <EntitySet Name="DishesOrders" EntityType="RestModel.DishesOrder" />
+    <EntitySet Name="Orders" EntityType="RestModel.Order" />
+    <EntitySet Name="Positions" EntityType="RestModel.Position" />
+    <EntitySet Name="Staffs" EntityType="RestModel.Staff" />
+    <EntitySet Name="Users" EntityType="RestModel.User" />
+    <EntitySet Name="DishMenus" EntityType="RestModel.DishMenu" />
+    <AssociationSet Name="fk_comment_orderSet" Association="RestModel.fk_comment_order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CommentOrComplains" EntitySet="CommentOrComplains" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dish_to_categorySet" Association="RestModel.fk_dish_to_category">
+      <End Role="DishCategory" EntitySet="DishCategories" />
+      <End Role="DishDictionaries" EntitySet="DishDictionaries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_dish_dishSet" Association="RestModel.fk_order_dish_dish">
+      <End Role="DishDictionary" EntitySet="DishDictionaries" />
+      <End Role="DishesOrders" EntitySet="DishesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_dish_orderSet" Association="RestModel.fk_order_dish_order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="DishesOrders" EntitySet="DishesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_staff_positionSet" Association="RestModel.fk_staff_position">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Staffs" EntitySet="Staffs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CommentOrComplain" ed:Guid="0086d53d-ff80-4bd7-b0b9-07405479ee9e">
+    <Key>
+      <PropertyRef Name="CommentOrComplainId" />
+    </Key>
+    <Property Name="CommentOrComplainId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="8bda16df-2d09-4e84-8c3e-424ca87160a0" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="65f0b8b9-c7e4-42a6-a4db-1c28f69599d3" />
+    <Property Name="Email" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="39d134be-2d43-4f29-b6a3-262192273ee4" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="7d389130-170b-4187-b710-0ffeb8b0e799" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="f3c38808-1eb4-43bb-90f9-90e45dfe79cb" />
+    <NavigationProperty Name="Order" Relationship="RestModel.fk_comment_order" FromRole="CommentOrComplains" ToRole="Order" ed:Guid="2976b6f5-afad-48de-9f15-547453dad80b" />
+  </EntityType>
+  <EntityType Name="DishCategory" ed:Guid="acbe88f2-8df6-4888-999e-ff33c60545ff">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="a0d24971-cc86-4c00-bea2-78a25350471c" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="d37895e0-4259-49b8-b1b5-a4eb844c26e6" />
+    <Property Name="Notes" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="73594cdc-2977-4ad8-b634-afa7a5b359cb" />
+    <NavigationProperty Name="DishDictionaries" Relationship="RestModel.fk_dish_to_category" FromRole="DishCategory" ToRole="DishDictionaries" ed:Guid="41121e92-ba9b-478f-a42c-3241e34842ea" />
+  </EntityType>
+  <EntityType Name="DishDictionary" ed:Guid="435b78aa-d0bf-418e-802e-86f3546a1b80">
+    <Key>
+      <PropertyRef Name="DishId" />
+    </Key>
+    <Property Name="DishId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="3b1e6464-5241-4439-b97e-9fb64f8ddae5" />
+    <Property Name="Name" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="39ad41f8-f248-4784-9f15-34c4905414b7" />
+    <Property Name="Price" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="af6194ee-a353-4be4-a106-cca616b3df88" />
+    <Property Name="Amount" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="f0529f28-46a0-4cea-a58c-59625b3afeaf" />
+    <Property Name="CategoryId" Type="Int32" ed:ValidateRequired="false" ed:Guid="28449cac-8247-4eb6-8d13-89a3d307343a" />
+    <NavigationProperty Name="DishCategory" Relationship="RestModel.fk_dish_to_category" FromRole="DishDictionaries" ToRole="DishCategory" ed:Guid="c56d14ee-c373-4d50-a3f5-eb1676b77621" />
+    <NavigationProperty Name="DishesOrders" Relationship="RestModel.fk_order_dish_dish" FromRole="DishDictionary" ToRole="DishesOrders" ed:Guid="d33449b4-399c-4919-b53f-3902a0cf55b4" />
+  </EntityType>
+  <EntityType Name="DishesOrder" ed:Guid="77a34199-e452-42e7-b3bc-99ec3fc718bf">
+    <Key>
+      <PropertyRef Name="DishesOrderId" />
+    </Key>
+    <Property Name="DishId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="3d4198d1-5367-4d02-80c7-62febdbe09aa" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="e03e7423-77b2-4443-802e-d9fcb14f8f82" />
+    <Property Name="DishesCount" Type="Int32" ed:ValidateRequired="false" ed:Guid="cd726e65-4d0b-4965-b7a1-f1c810fcc259" />
+    <Property Name="DishesOrderId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="2c66b1ce-cc17-439f-9bd0-9596e6fb3002" />
+    <NavigationProperty Name="DishDictionary" Relationship="RestModel.fk_order_dish_dish" FromRole="DishesOrders" ToRole="DishDictionary" ed:Guid="4641a67e-4a95-40ee-994d-06059e50ce51" />
+    <NavigationProperty Name="Order" Relationship="RestModel.fk_order_dish_order" FromRole="DishesOrders" ToRole="Order" ed:Guid="1b5919a4-0f18-400e-bc8e-056994eaa245" />
+  </EntityType>
+  <EntityType Name="Order" ed:Guid="3eacb905-f055-474f-b6d6-8480328083b5">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="07274e54-aa9a-4df9-81a1-d87b88173805" />
+    <Property Name="TableId" Type="Int32" ed:ValidateRequired="false" ed:Guid="ea9af489-ecbb-4512-a206-d2f24e5ec505" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="e64573d4-b94e-4960-b9e9-02a6ec8ea2a5" />
+    <NavigationProperty Name="CommentOrComplains" Relationship="RestModel.fk_comment_order" FromRole="Order" ToRole="CommentOrComplains" ed:Guid="d0c06e28-70eb-42ac-85f6-61c35ddbff29" />
+    <NavigationProperty Name="DishesOrders" Relationship="RestModel.fk_order_dish_order" FromRole="Order" ToRole="DishesOrders" ed:Guid="ff021d87-89b6-4fc3-b839-d7afd766fa2b" />
+  </EntityType>
+  <EntityType Name="Position" ed:Guid="f7517422-d9ea-4ff2-91be-2e9ad7afc720">
+    <Key>
+      <PropertyRef Name="PositionId" />
+    </Key>
+    <Property Name="PositionId" Type="Int32" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="8093dc6a-f8f1-443e-8b47-b6de9dfd4280" />
+    <Property Name="StaffPosition" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="0df9462d-51a1-4a55-b8a9-59cb3f40270b" />
+    <Property Name="Salary" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="4915fe6f-5148-41e2-abce-6882134a8eac" />
+    <NavigationProperty Name="Staffs" Relationship="RestModel.fk_staff_position" FromRole="Position" ToRole="Staffs" ed:Guid="54e9274c-1c89-4070-a2d5-8b44f9d3fe70" />
+  </EntityType>
+  <EntityType Name="Staff" ed:Guid="d2570607-7106-4f0a-a230-3371579feea1">
+    <Key>
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="StaffId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a92d2a91-265b-4b7b-87f2-fb14d3728b25" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="2aabaeec-0baa-4795-a850-ca252ee2b8c0" />
+    <Property Name="PassportId" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="eed865e3-b4ae-4011-8c76-2c07d7bda26f" />
+    <Property Name="Email" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="2d81104e-9859-47ce-9040-842992244105" />
+    <Property Name="PositionId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="6ef588ae-42fa-4dcc-8e45-6507882bc7f0" />
+    <NavigationProperty Name="Position" Relationship="RestModel.fk_staff_position" FromRole="Staffs" ToRole="Position" ed:Guid="71ff13cb-4d8d-420c-8b56-13b1149e663a" />
+  </EntityType>
+  <EntityType Name="User" ed:Guid="ca1e4208-0f84-436d-a6e1-27ea59ce0aea">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="20" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="1eba3fcd-4aab-4121-8a16-282fec2d94d1" />
+    <Property Name="Hash" Type="String" Nullable="false" MaxLength="96" ed:ValidateMaxLength="96" ed:ValidateRequired="true" ed:Guid="3ee68869-96e7-4d25-ac02-d8c91abda446" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="54b881cc-2822-4427-9e54-77057592288f" />
+  </EntityType>
+  <EntityType Name="DishMenu" ed:Guid="4d44766b-367e-4675-b439-bacb69ebb49a">
+    <Documentation>
+      <Summary>VIEW</Summary>
+    </Documentation>
+    <Key>
+      <PropertyRef Name="DishId" />
+      <PropertyRef Name="CategoryName" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="DishId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="cacbac9c-9314-4f74-8372-8894a29d3d41" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="40449e2a-073f-4df6-bd61-9cf7017380b4" />
+    <Property Name="Name" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="81fbafcb-b075-4684-9e94-a90f5031cd4c" />
+    <Property Name="Amount" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="bba43ebc-8cf5-432b-b73d-f6ad967d0a87" />
+    <Property Name="Price" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="ed61a831-74a1-480c-aa97-b7056165f1b3" />
+    <Property Name="Notes" Type="String" MaxLength="45" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="d667d778-f738-408a-b0e1-6c2cd1febd3c" />
+  </EntityType>
+  <Association Name="fk_comment_order" ed:Guid="2b7b517b-7e83-41f7-8e26-6c14f263fcbe">
+    <End Role="Order" Type="RestModel.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommentOrComplains" Type="RestModel.CommentOrComplain" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="CommentOrComplains">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dish_to_category" ed:Guid="1e0120fb-3458-449a-866c-0cc7294bfc2d">
+    <End Role="DishCategory" Type="RestModel.DishCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DishDictionaries" Type="RestModel.DishDictionary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DishCategory">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="DishDictionaries">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_dish_dish" ed:Guid="fe238fa7-46a0-4ebb-ae2b-97ddfb91b19a">
+    <End Role="DishDictionary" Type="RestModel.DishDictionary" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DishesOrders" Type="RestModel.DishesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DishDictionary">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="DishesOrders">
+        <PropertyRef Name="DishId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_dish_order" ed:Guid="022291a7-6145-4acb-9f71-a91007532c0c">
+    <End Role="Order" Type="RestModel.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DishesOrders" Type="RestModel.DishesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="DishesOrders">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_staff_position" ed:Guid="24d792eb-f3fa-4ccd-8823-a14f1ccdef39">
+    <End Role="Position" Type="RestModel.Position" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Staffs" Type="RestModel.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="PositionId" />
+      </Principal>
+      <Dependent Role="Staffs">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

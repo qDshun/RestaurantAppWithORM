@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestEntitiesStoreContainer" CdmEntityContainer="RestEntities">
+    <EntitySetMapping Name="CommentOrComplains">
+      <EntityTypeMapping TypeName="RestModel.CommentOrComplain">
+        <MappingFragment StoreEntitySet="comment_or_complains">
+          <ScalarProperty Name="CommentOrComplainId" ColumnName="comment_or_complain_id" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="Email" ColumnName="email" />
+          <ScalarProperty Name="Comment" ColumnName="comment" />
+          <ScalarProperty Name="OrderId" ColumnName="order_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DishCategories">
+      <EntityTypeMapping TypeName="RestModel.DishCategory">
+        <MappingFragment StoreEntitySet="dish_categories">
+          <ScalarProperty Name="CategoryId" ColumnName="category_id" />
+          <ScalarProperty Name="CategoryName" ColumnName="category_name" />
+          <ScalarProperty Name="Notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DishDictionaries">
+      <EntityTypeMapping TypeName="RestModel.DishDictionary">
+        <MappingFragment StoreEntitySet="dish_dictionaries">
+          <ScalarProperty Name="DishId" ColumnName="dish_id" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="Price" ColumnName="price" />
+          <ScalarProperty Name="Amount" ColumnName="amount" />
+          <ScalarProperty Name="CategoryId" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DishesOrders">
+      <EntityTypeMapping TypeName="RestModel.DishesOrder">
+        <MappingFragment StoreEntitySet="dishes_orders">
+          <ScalarProperty Name="DishId" ColumnName="dish_id" />
+          <ScalarProperty Name="OrderId" ColumnName="order_id" />
+          <ScalarProperty Name="DishesCount" ColumnName="dishes_count" />
+          <ScalarProperty Name="DishesOrderId" ColumnName="dishes_order_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="RestModel.Order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="OrderId" ColumnName="order_id" />
+          <ScalarProperty Name="TableId" ColumnName="table_id" />
+          <ScalarProperty Name="OrderDate" ColumnName="order_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="RestModel.Position">
+        <MappingFragment StoreEntitySet="positions">
+          <ScalarProperty Name="PositionId" ColumnName="position_id" />
+          <ScalarProperty Name="StaffPosition" ColumnName="staff_position" />
+          <ScalarProperty Name="Salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="RestModel.Staff">
+        <MappingFragment StoreEntitySet="staffs">
+          <ScalarProperty Name="StaffId" ColumnName="staff_id" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="PassportId" ColumnName="passport_id" />
+          <ScalarProperty Name="Email" ColumnName="email" />
+          <ScalarProperty Name="PositionId" ColumnName="position_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="RestModel.User">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="UserId" ColumnName="user_id" />
+          <ScalarProperty Name="Hash" ColumnName="hash" />
+          <ScalarProperty Name="Email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DishMenus">
+      <EntityTypeMapping TypeName="RestModel.DishMenu">
+        <MappingFragment StoreEntitySet="dish_menus">
+          <ScalarProperty Name="DishId" ColumnName="dish_id" />
+          <ScalarProperty Name="CategoryName" ColumnName="category_name" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="Amount" ColumnName="amount" />
+          <ScalarProperty Name="Price" ColumnName="price" />
+          <ScalarProperty Name="Notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
